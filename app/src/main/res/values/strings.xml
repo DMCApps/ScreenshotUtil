@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">ScreenshotService</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_screenshot">Screenshot</string>
+
+    <string-array name="example_titles">
+        <item>Relative Layout</item>
+        <item>Linear Layout</item>
+        <item>Scroll View</item>
+        <item>List View</item>
+        <item>Grid View</item>
+    </string-array>
+    <string name="title_activity_list_view_example">ListViewExampleActivity</string>
 </resources>
