@@ -46,6 +46,6 @@ public class ListViewExampleActivity extends MasterExampleActivity {
 
     @Override
     public void screenshotView() {
-        
+
     }
 }
