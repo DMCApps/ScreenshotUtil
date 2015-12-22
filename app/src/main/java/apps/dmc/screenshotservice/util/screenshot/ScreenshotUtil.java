@@ -1,14 +1,16 @@
-package apps.dmc.screenshotservice.util;
+package apps.dmc.screenshotservice.util.screenshot;
 
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
-import apps.dmc.screenshotservice.util.algorithms.ViewScreenshotAlgorithm;
-import apps.dmc.screenshotservice.util.algorithms.GridViewScreenshotAlgorithm;
-import apps.dmc.screenshotservice.util.algorithms.ScrollViewScreenshotAlgorithm;
-import apps.dmc.screenshotservice.util.algorithms.parent.ScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.ListViewScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.ViewScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.GridViewScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.ScrollViewScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.parent.ScreenshotAlgorithm;
 
 /**
  * Created by DCarmo on 15-12-20.
@@ -47,10 +49,12 @@ public class ScreenshotUtil {
         else if (view instanceof GridView) {
             screenshotAlgorithm = new GridViewScreenshotAlgorithm();
         }
+        else if (view instanceof ListView) {
+            screenshotAlgorithm = new ListViewScreenshotAlgorithm();
+        }
         /*else if (view instanceof FreezeColumnHeaderTableView) {
             screenshotRenderer = new FreezeColumnHeaderTableViewScreenshot((FreezeColumnHeaderTableView)view);
         }*/
-        // TODO: ListViewScreenshotAlgorithm
         else {
             screenshotAlgorithm = new ViewScreenshotAlgorithm();
         }

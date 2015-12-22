@@ -1,9 +1,9 @@
-package apps.dmc.screenshotservice.util.algorithms;
+package apps.dmc.screenshotservice.util.screenshot.algorithms;
 
 import android.graphics.Bitmap;
 import android.view.View;
 
-import apps.dmc.screenshotservice.util.algorithms.parent.ScreenshotAlgorithm;
+import apps.dmc.screenshotservice.util.screenshot.algorithms.parent.ScreenshotAlgorithm;
 
 /**
  * Created by DCarmo on 15-12-20.

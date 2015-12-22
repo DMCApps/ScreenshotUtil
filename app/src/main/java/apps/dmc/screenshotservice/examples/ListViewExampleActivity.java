@@ -1,19 +1,23 @@
 package apps.dmc.screenshotservice.examples;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import apps.dmc.screenshotservice.R;
 import apps.dmc.screenshotservice.examples.master.MasterExampleActivity;
+import apps.dmc.screenshotservice.util.screenshot.ScreenshotUtil;
+import apps.dmc.screenshotservice.util.email.EmailUtil;
 
 public class ListViewExampleActivity extends MasterExampleActivity {
 
@@ -46,6 +50,20 @@ public class ListViewExampleActivity extends MasterExampleActivity {
 
     @Override
     public void screenshotView() {
+        Bitmap screenshotBmp = ScreenshotUtil.ScreenshotView(mListView);
 
+        File cache = getApplicationContext().getExternalCacheDir();
+
+        File file = new File(cache, "share_file.png");
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            screenshotBmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.flush();
+            out.close();
+        }
+        catch (IOException e) {
+            Log.e("ERROR", String.valueOf(e.getMessage()));
+        }
+        EmailUtil.createShareIntent("Subject", "Text", Uri.fromFile(file));
     }
 }

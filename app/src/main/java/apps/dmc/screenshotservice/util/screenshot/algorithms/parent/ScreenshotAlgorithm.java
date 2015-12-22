@@ -1,4 +1,4 @@
-package apps.dmc.screenshotservice.util.algorithms.parent;
+package apps.dmc.screenshotservice.util.screenshot.algorithms.parent;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
