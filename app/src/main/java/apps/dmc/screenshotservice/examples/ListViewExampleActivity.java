@@ -1,5 +1,6 @@
 package apps.dmc.screenshotservice.examples;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class ListViewExampleActivity extends MasterExampleActivity {
         catch (IOException e) {
             Log.e("ERROR", String.valueOf(e.getMessage()));
         }
-        EmailUtil.createShareIntent("Subject", "Text", Uri.fromFile(file));
+        Intent emailItent = EmailUtil.createShareIntent("Screenshot Utility", "Check out this screenshot I took!", Uri.fromFile(file));
+        startActivity(Intent.createChooser(emailItent, "Share Screenshot!"));
     }
 }
