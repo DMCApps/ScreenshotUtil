@@ -65,7 +65,7 @@ public class ListViewExampleActivity extends MasterExampleActivity {
         catch (IOException e) {
             Log.e("ERROR", String.valueOf(e.getMessage()));
         }
-        Intent emailItent = EmailUtil.createShareIntent("Screenshot Utility", "Check out this screenshot I took!", Uri.fromFile(file));
+        Intent emailItent = EmailUtil.createShareIntent("Screenshot Utility - List View", "Check out this screenshot I took!", Uri.fromFile(file));
         startActivity(Intent.createChooser(emailItent, "Share Screenshot!"));
     }
 }

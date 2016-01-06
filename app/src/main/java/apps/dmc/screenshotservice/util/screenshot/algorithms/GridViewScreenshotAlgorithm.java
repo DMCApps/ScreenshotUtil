@@ -23,48 +23,47 @@ public class GridViewScreenshotAlgorithm extends ScreenshotAlgorithm<GridView> {
             // TODO: THIS ONLY WORKS IF THE ITEMS TAKE UP THE FULL WIDTH! DOES NOT DO SIDE BY SIDE GRID ITEMS.
 
             ListAdapter adapter = viewToScreenshot.getAdapter();
-            int itemscount = adapter.getCount();
+            int itemsCount = adapter.getCount();
 
-            int totalGridHeight = 0;
+            int totalViewHeight = 0;
 
             // Prepare the views to be rendered into bitmaps.
             // DO NOT store the bitmaps here like others have done. This can be very memory
             // intensive. It's best to prepare the views and get their heights then render them
             // later and release them immediately after.
-            List<View> viewsToRender = new ArrayList<View>();
-            for (int i = 0; i < itemscount; i++) {
-                View childView = adapter.getView(i, null, viewToScreenshot);
+            for (int index = 0; index < itemsCount; index++) {
+                View childView = adapter.getView(index, null, viewToScreenshot);
                 childView.measure(View.MeasureSpec.makeMeasureSpec(viewToScreenshot.getWidth(), View.MeasureSpec.EXACTLY),
                         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-                totalGridHeight += childView.getMeasuredHeight();
-
-                viewsToRender.add(childView);
+                totalViewHeight += childView.getMeasuredHeight();
             }
 
             // Create the resulting bitmap
-            Bitmap bigBitmap = Bitmap.createBitmap(viewToScreenshot.getMeasuredWidth(), totalGridHeight, Bitmap.Config.ARGB_8888);
+            Bitmap bigBitmap = Bitmap.createBitmap(viewToScreenshot.getMeasuredWidth(), totalViewHeight, Bitmap.Config.ARGB_8888);
 
             // Prepare the canvas to draw on.
             Canvas bigCanvas = new Canvas(bigBitmap);
+            Paint bgPaint = new Paint();
+            bgPaint.setColor(getBackgroundColorOfView(viewToScreenshot));
+            bgPaint.setStyle(Paint.Style.FILL);
+            bigCanvas.drawRect(0, 0, viewToScreenshot.getMeasuredWidth(), totalViewHeight, bgPaint);
 
             Paint paint = new Paint();
             int iHeight = 0;
 
             // Draw the individual views to the canvas.
-            for (int index = 0; index < viewsToRender.size(); index++) {
-                View viewToRender = viewsToRender.get(index);
+            for (int index = 0; index < itemsCount; index++) {
+                View childView = adapter.getView(index, null, viewToScreenshot);
                 // Views seem to lose their measurements sometimes. Remeasure.
-                viewToRender.measure(View.MeasureSpec.makeMeasureSpec(viewToScreenshot.getWidth(), View.MeasureSpec.EXACTLY),
+                childView.measure(View.MeasureSpec.makeMeasureSpec(viewToScreenshot.getWidth(), View.MeasureSpec.EXACTLY),
                         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-                viewToRender.layout(0, 0, viewToRender.getMeasuredWidth(), viewToRender.getMeasuredHeight());
-                Bitmap bmp = loadBitmapFromViewDrawingCache(viewToRender);
+                childView.layout(0, 0, childView.getMeasuredWidth(), childView.getMeasuredHeight());
+                Bitmap bmp = loadBitmapFromViewDrawingCache(childView);
                 bigCanvas.drawBitmap(bmp, 0, iHeight, paint);
                 iHeight += bmp.getHeight();
 
                 bmp.recycle();
-                bmp = null;
             }
-
 
             return bigBitmap;
         }

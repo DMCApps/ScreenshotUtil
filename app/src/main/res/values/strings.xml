@@ -10,4 +10,5 @@
         <item>Grid View</item>
     </string-array>
     <string name="title_activity_list_view_example">ListViewExampleActivity</string>
+    <string name="title_activity_grid_view_example">GridViewExampleActivity</string>
 </resources>

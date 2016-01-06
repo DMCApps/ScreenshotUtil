@@ -44,10 +44,15 @@ public class MainActivity extends AppCompatActivity {
         examplesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = null;
                 if (position == ExampleItemPositions.ListView.ordinal()) {
-                    Intent intent = new Intent(MainActivity.this, ListViewExampleActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(MainActivity.this, ListViewExampleActivity.class);
                 }
+                else if (position == ExampleItemPositions.GridView.ordinal()) {
+                    intent = new Intent(MainActivity.this, GridViewExampleActivity.class);
+                }
+
+                startActivity(intent);
             }
         });
     }

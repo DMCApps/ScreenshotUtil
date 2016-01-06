@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="apps.dmc.screenshotservice.examples.ListViewExampleActivity">
+    tools:context="apps.dmc.screenshotservice.GridViewExample">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
@@ -21,9 +21,9 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-    
-    <ListView
-        android:id="@+id/list_view_example_lv"
+
+    <GridView
+        android:id="@+id/grid_view_example_gv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"/>

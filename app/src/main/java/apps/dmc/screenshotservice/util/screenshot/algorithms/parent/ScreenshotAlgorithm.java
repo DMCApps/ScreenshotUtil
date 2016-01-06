@@ -2,6 +2,9 @@ package apps.dmc.screenshotservice.util.screenshot.algorithms.parent;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 /**
@@ -45,6 +48,23 @@ public abstract class ScreenshotAlgorithm<T> {
         view.setDrawingCacheEnabled(false);
 
         return bmp;
+    }
+
+    /**
+     * Gets the color of the background of the view.
+     *
+     * @param
+     *      view -> the view to get the color from
+     * @return
+     *      int value of the given color.
+     */
+    protected int getBackgroundColorOfView(View view) {
+        int color = Color.TRANSPARENT;
+        Drawable background = view.getBackground();
+        if (background instanceof ColorDrawable)
+            color = ((ColorDrawable) background).getColor();
+
+        return color;
     }
 
     /**
